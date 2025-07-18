@@ -1,16 +1,20 @@
-FROM ubuntu:22.04
+FROM debian:bookworm
 
-# Install prerequisites
-RUN apt-get update && apt-get install -y curl git build-essential
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Install devkitPro pacman
-RUN curl -L https://packages.devkitpro.org/packages/devkitpro-pacman.deb -o devkitpro-pacman.deb && \
-    dpkg -i devkitpro-pacman.deb && \
-    apt-get install -f -y
+# Install devkitPro pacman + dependencies
+RUN apt-get update && apt-get install -y \
+    git curl wget make build-essential \
+    python3 ca-certificates gnupg2 unzip
 
-# Initialize devkitPro environment
-RUN dkp-pacman -Sy libctru
+# Install devkitPro pacman (official script)
+RUN curl -fsSL https://apt.devkitpro.org/install-devkitpro-pacman | bash
 
+# Install 3DS toolchain
+RUN dkp-pacman -Syu --noconfirm devkitARM libctru 3ds-dev
+
+# Set environment variables
 ENV DEVKITPRO=/opt/devkitpro
-ENV DEVKITARM=$DEVKITPRO/devkitARM
+ENV DEVKITARM=/opt/devkitpro/devkitARM
 ENV PATH=$DEVKITARM/bin:$PATH
