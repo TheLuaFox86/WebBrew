@@ -1,0 +1,13 @@
+{
+  "name": "devkitPro Codespace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-vscode.cpptools"
+  ],
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y devkitpro-pacman && sudo dkp-pacman -Sy libctru"
+}
