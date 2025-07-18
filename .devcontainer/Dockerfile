@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     python3 ca-certificates gnupg2 unzip
 
 # Install devkitPro pacman (official script)
-RUN curl -fsSL https://apt.devkitpro.org/install-devkitpro-pacman | bash
+RUN wget https://apt.devkitpro.org/install-devkitpro-pacman && chmod +x ./install-devkitpro-pacman && ./install-devkitpro-pacman | bash
 
 # Install 3DS toolchain
 RUN dkp-pacman -Syu --noconfirm devkitARM libctru 3ds-dev
