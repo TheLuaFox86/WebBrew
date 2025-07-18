@@ -1,13 +1,15 @@
 {
-  "name": "devkitPro Codespace",
+  "name": "devkitPro 3DS (Debian)",
   "build": {
     "dockerfile": "Dockerfile"
   },
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.defaultProfile.linux": "bash"
   },
   "extensions": [
-  "ms-vscode.cpptools"
+    "ms-vscode.cpptools",                // Microsoft C++ tools
+    "gea-embedded.gea-build-tools"       // (Optional) GEA auto Makefile integration
   ],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y devkitpro-pacman && sudo dkp-pacman -Sy libctru"
+  "postCreateCommand": "echo 'Ready for 3DS dev!'",
+  "remoteUser": "vscode"
 }
