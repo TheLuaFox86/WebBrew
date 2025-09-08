@@ -1,0 +1,74 @@
+<style type="text/css">
+body {
+color:#005C00;
+background-color:#000000;
+width:100%;
+height:90%;
+}
+textarea {
+width:100%;
+height:100%;
+background-color:#3C3C3C;
+color:#00DF00;
+font-family:Consolas;
+font-size: calc(1.5rem + calc(2vw * 2vh))
+}
+.dsp {
+width:100%;
+height:100%;
+background-color:#5C5C5C;
+}
+input {
+background-color:#5C5C5C;
+color:#00DF00;
+width:50%;
+height:10%;
+font-size:350%;
+}
+button {
+color:#00DF00;
+background-color:#5C5C5C;
+width:50%;
+height:10%;
+font-size:350%;
+}
+</style>
+<div class="dsp">
+<textarea Id="screen" > </textarea></a></div>
+<input id="keyboard"><button id="Enter"> Enter</button>
+<script>
+window.onerror = function(r, col) {
+prompt("Error" + r + col)
+window.close()
+}
+</script>
+<script src="./cores/lua5.3.js"></script>
+</script>
+<script type="application/lua">
+_G.window = js.global
+_G.document = window.document
+_G.io = {}
+_G.Start = function(setup, loop)
+io.write = function(txt)
+    local out = document:getElementById('screen')
+out.value = out.value .. txt
+end
+window.onkeypress = function(_, e)
+    if e.code == "Enter" then
+     ent = document:getElementById('Enter')
+ent:click()
+    else
+k = document:getElementById('keyboard')
+k:focus()
+end
+end
+if enter() then
+k = document:getElementById('keyboard')
+io.write(k.value .. '\n')
+end
+window.setup()
+window:setInterval(loop, 1)
+end
+</script>
+
+
